@@ -19,11 +19,8 @@ class HomeScene: GameScene{
     
     #if os(tvOS) || os(iOS)
     
-//    let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(remotePressed(_:)))
-    //tapRecogniser.allowedPressTypes = [NSNumber(value: UIPressType.select.rawValue)];
-//        let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(remotePressed(_:)))
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        GameControl.gameControl.loadMenuScene()
     }
     
     #endif
@@ -37,15 +34,10 @@ class HomeScene: GameScene{
         guard !event.isARepeat else { return }
         let keyCode: UInt16 = event.keyCode
         if keyCode == 49 {
-            loadMenuScene()
+            GameControl.gameControl.loadMenuScene()
         }
     }
     
     #endif
-    
-    
-    func loadMenuScene(){
-        
-    }
     
 }

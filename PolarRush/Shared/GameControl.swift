@@ -13,7 +13,7 @@ import SpriteKit
 // This file containts all the Main Control for this project.
 class GameControl{
     
-    var currentView: UIView?
+    var currentView: SKView?
     var gameController: GameViewController?
     
     private init(){
@@ -53,15 +53,31 @@ class GameControl{
     func loadMenuScene(){
         
         #if os(iOS)
-            
+            guard let scene = MenuScene(fileNamed: "MenuScene_iOS") else {
+                print("Unable to load MenuScene")
+                abort()
+            }
+            let skView = GameControl.gameControl.gameController?.view as! SKView
+            skView.presentScene(scene)
         #endif
         
         #if os(tvOS)
-            
+            guard let scene = MenuScene(fileNamed: "MenuScene_tvOS") else {
+                print("Unable to load MenuScene")
+                abort()
+            }
+            let skView = GameControl.gameControl.gameController?.view as! SKView
+            skView.presentScene(scene)
         #endif
         
         #if os(macOS)
+            guard let scene = MenuScene(fileNamed: "MenuScene_macOS") else {
+                print("Unable to load MenuScene")
+                abort()
+            }
             
+            let skView = GameControl.gameControl.gameController?.view as! SKView
+            skView.presentScene(scene)
         #endif
         
     }

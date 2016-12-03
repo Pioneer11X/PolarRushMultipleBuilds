@@ -15,6 +15,9 @@ class GameViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GameControl.gameControl.currentView = self.view as! SKView
+        GameControl.gameControl.gameController = self
+        
 //        let scene = GameScene.loadHomeScene()
         let scene = GameControl.gameControl.loadHomeScene()
         
