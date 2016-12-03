@@ -13,15 +13,18 @@ class HomeScene: GameScene{
     
     // If tvOS, detect button press.
     
-    func remotePressed(_ recognizer: UITapGestureRecognizer){
+    func remotePressed(){
         print("kpap")
     }
     
-    #if os(tvOS)
+    #if os(tvOS) || os(iOS)
     
 //    let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(remotePressed(_:)))
     //tapRecogniser.allowedPressTypes = [NSNumber(value: UIPressType.select.rawValue)];
-        let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(remotePressed(_:)))
+//        let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(remotePressed(_:)))
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
     #endif
     

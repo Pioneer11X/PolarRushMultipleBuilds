@@ -50,4 +50,20 @@ class GameControl{
         return scene
     }
     
+    func loadMenuScene(){
+        
+        #if os(iOS)
+            
+        #endif
+        
+        #if os(tvOS)
+            
+        #endif
+        
+        #if os(macOS)
+            
+        #endif
+        
+    }
+    
 }
