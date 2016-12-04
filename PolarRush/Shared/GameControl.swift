@@ -22,6 +22,10 @@ class GameControl{
     
     static var gameControl = GameControl()
     
+    @objc func printPress(){
+        print("press")
+    }
+    
     func loadHomeScene() -> HomeScene{
         // Check which device it is.
         

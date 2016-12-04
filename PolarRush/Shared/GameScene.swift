@@ -7,6 +7,8 @@
 //
 
 import SpriteKit
+import UIKit
+
 #if os(watchOS)
     import WatchKit
     // <rdar://problem/26756207> SKColor typealias does not seem to be exposed on watchOS SpriteKit
@@ -51,32 +53,19 @@ class GameScene: SKScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        // tvOS Add a recogniser.
+        #if os(tvOS)
+            let tapgestureRec = UIGestureRecognizer(target: self, action: #selector(GameControl.gameControl.printPress))
+//            tapgestureRec.allowedPressTypes = [NSNumber.value(UIPressType.select.rawValue)]
+//            tapgestureRec.allowedPressTypes = 
+            tapgestureRec.allowedPressTypes = [ NSNumber(value: UIPressType.select.rawValue) ]
+//            print(UIPressType.select.rawValue)
+//            print(NSNumber(value: UIPressType.select.rawValue))
+            self.view?.addGestureRecognizer(tapgestureRec)
+        #endif
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 4.0
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-            
-            #if os(watchOS)
-                // For watch we just periodically create one of these and let it spin
-                // For other platforms we let user touch/mouse events create these
-                spinnyNode.position = CGPoint(x: 0.0, y: 0.0)
-                spinnyNode.strokeColor = SKColor.red
-                self.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 2.0),
-                                                                   SKAction.run({
-                                                                       let n = spinnyNode.copy() as! SKShapeNode
-                                                                       self.addChild(n)
-                                                                   })])))
-            #endif
-            
-        }
     }
-    
+
     #if os(watchOS)
     override func sceneDidLoad() {
         self.setUpScene()
